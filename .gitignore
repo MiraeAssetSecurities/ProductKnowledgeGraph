@@ -21,7 +21,6 @@ cache/
 # IDE
 .vscode/
 .idea/
-
 # experiments
 #experiments/
 
@@ -34,4 +33,5 @@ PROGRESS.md
 plan.md
 
 temp/
-DTP_venv/
+*_venv/
+*.pdf
