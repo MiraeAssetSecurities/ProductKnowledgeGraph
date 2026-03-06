@@ -1,0 +1,27 @@
+
+general_settings:
+  max_parallel_requests: 1
+  enable_queue: true
+  queue_timeout: 600
+  max_retries: 3
+  timeout: 180
+  bedrock_ratelimit_mode: header   # 가장 중요
+  master_key: "zhRlfl1!" 
+model_list:
+  - model_name: bedrock-claude-4-5-sonnet
+    litellm_params:  
+      model: bedrock/global.anthropic.claude-sonnet-4-5-20250929-v1:0
+      aws_access_key_id: os.environ/AWS_ACCESS_KEY_ID
+      aws_secret_access_key: os.environ/AWS_SECRET_ACCESS_KEY
+      aws_region_name: ap-northeast-2
+      drop_params: true
+    rate_limit:
+      max_requests_per_minute: 5
+      max_tokens_per_minute: 4000
+      timeout: 180
+  - model_name: bedrock-titan-embed-v2
+    litellm_params:
+      model: bedrock/amazon.titan-embed-text-v2:0
+      aws_access_key_id: os.environ/AWS_ACCESS_KEY_ID
+      aws_secret_access_key: os.environ/AWS_SECRET_ACCESS_KEY
+      aws_region_name: ap-northeast-2

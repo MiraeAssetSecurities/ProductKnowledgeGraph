@@ -1,22 +1,16 @@
-import os
-from dotenv import load_dotenv
-from openai import OpenAI  
+import openai
 
-#load_dotenv(dotenv_path=".env", override=False)
+client = openai.OpenAI(
+    api_key="zhRlfl1!",  # config.yaml에 설정한 master_key
+    base_url="http://0.0.0.0:4000"  # litellm 프록시 주소
+)
 
+# config.yaml에 정의한 model_name 사용
+response = client.chat.completions.create(
+    model="bedrock-claude-4-5-sonnet", 
+    messages=[
+        {"role": "user", "content": "How does litellm work?"}
+    ]
+)
 
-client = OpenAI()  
-
-models = client.models.list()
-
-for model in models.data:
-    print(model.id)
-'''
-response = client.responses.create( 
-    model="openai.anthropic.claude-sonnet-4-5-20250929-v1:0", 
-    input=[ 
-        {"role": "user", "content": "Write a one-sentence bedtime story about a unicorn."} 
-    ] 
-)  
-'''
-#print(response.output_text)
+print(response.choices[0].message.content)

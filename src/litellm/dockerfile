@@ -1,0 +1,19 @@
+# Dockerfile
+# 베이스 이미지
+FROM python:3.11-slim
+
+# 작업 디렉토리
+WORKDIR /app
+
+# 설정 파일 복사
+# (.dockerignore 덕분에 .env 파일은 복사되지 않습니다)
+COPY config.yaml .
+
+# litellm 프록시 설치
+RUN pip install 'litellm[proxy]'
+
+# 프록시 포트 개방
+EXPOSE 4000
+
+# 컨테이너 실행 시 litellm 프록시 시작
+CMD ["litellm", "--config", "config.yaml", "--host", "0.0.0.0"]
